@@ -13,9 +13,9 @@ int main() {
 	string str;
 	string success("<p class=\"FM-cbox5\"><a href=\"http://home.gamer.com.tw/"),
 		   fail("<div class=\"FM-cboxfold");
-	//success ¨S§R¤å, fail §R¤å
+	//success æ²’åˆªæ–‡, fail åˆªæ–‡
 	map<int, string> list, winner;
-	int i, count = 1;
+	int i, count = 1, del = 0;
 
 	while (getline(fin, str)) {
 		if (!str.compare(0, 54, success)) {
@@ -30,12 +30,15 @@ int main() {
 
 			list[count++] = account + " (" + id + ")";
 		}
-		else if (!str.compare(0, 23, fail))
+		else if (!str.compare(0, 23, fail)) {
 			count++;
+			del++;
+		}
 	}
 
 	list.erase(list.find(1));
-	//±Æ°£¦Û¤v
+	del++;
+	//æŽ’é™¤è‡ªå·±
 	i = 1;
 	for (auto iter = list.begin(); iter != list.end(); iter++, i++) {
 		printf("%3dF %25s\t", iter->first, iter->second.c_str());
@@ -45,11 +48,12 @@ int main() {
 
 	int totalNum;
 
-	cout << "\n-------------\n¿é¤J©â¼ú¤H¼Æ: ";
+	cout << "\n-------------\nè¼¸å…¥æŠ½çŽäººæ•¸: ";
 	cin >> totalNum;
 	
 	srand(time(NULL));
 	count--;
+	count -= del;
 	for (i = 0; i < totalNum; i++) {
 		int luckyNum = (rand() % count);
 		auto iter = next(list.begin(), luckyNum);
@@ -58,7 +62,7 @@ int main() {
 		list.erase(list.find(iter->first));
 		count--;
 	}
-	cout << "¤¤¼ú¦W³æ:" << endl;
+	cout << "ä¸­çŽåå–®:" << endl;
 
 	i = 1;
 	for (auto iter = winner.begin(); iter != winner.end(); iter++, i++) {
