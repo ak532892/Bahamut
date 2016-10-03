@@ -1,10 +1,11 @@
-#include<iostream>
-#include<fstream>
-#include<string>
 #include<map>
+#include<set>
 #include<ctime>
 #include<cstdio>
+#include<string>
 #include<conio.h>
+#include<fstream>
+#include<iostream>
 using namespace std;
 
 int main() {
@@ -12,8 +13,8 @@ int main() {
 	ofstream fout("out.txt");
 	string str;
 	string success("<p class=\"FM-cbox5\"><a href=\"http://home.gamer.com.tw/"),
-		   fail("<div class=\"FM-cboxfold");
-	//success æ²’åˆªæ–‡, fail åˆªæ–‡
+		fail("<div class=\"FM-cboxfold");
+	//success ¨S§R¤å, fail §R¤å
 	map<int, string> list, winner;
 	int i, count = 1, del = 0;
 
@@ -38,7 +39,7 @@ int main() {
 
 	list.erase(list.find(1));
 	del++;
-	//æŽ’é™¤è‡ªå·±
+	//±Æ°£¦Û¤v
 	i = 1;
 	for (auto iter = list.begin(); iter != list.end(); iter++, i++) {
 		printf("%3dF %25s\t", iter->first, iter->second.c_str());
@@ -48,26 +49,35 @@ int main() {
 
 	int totalNum;
 
-	cout << "\n-------------\nè¼¸å…¥æŠ½çŽäººæ•¸: ";
+	cout << "\n-------------\n¿é¤J©â¼ú¤H¼Æ: ";
 	cin >> totalNum;
-	
+
 	srand(time(NULL));
 	count--;
 	count -= del;
-	for (i = 0; i < totalNum; i++) {
+	set<string> dup;
+	//±Æ°£­«½Æ
+	for (i = 0; i < totalNum && count; i++) {
 		int luckyNum = (rand() % count);
 		auto iter = next(list.begin(), luckyNum);
+		int setSize = dup.size();
 
+		dup.insert(iter->second);
+		if (setSize == dup.size()) {
+			list.erase(list.find(iter->first));
+			count--;
+			continue;
+		}
 		winner[iter->first] = iter->second;
 		list.erase(list.find(iter->first));
 		count--;
 	}
-	cout << "ä¸­çŽåå–®:" << endl;
+	cout << "¤¤¼ú¦W³æ:" << endl;
 
 	i = 1;
 	for (auto iter = winner.begin(); iter != winner.end(); iter++, i++) {
 		printf("%3dF %25s\t", iter->first, iter->second.c_str());
-		fout << iter->first << "F "<< iter->second << endl;
+		fout << iter->first << "F " << iter->second << endl;
 		if (!(i % 3))
 			cout << endl;
 	}
