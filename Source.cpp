@@ -12,7 +12,7 @@ int main() {
 	ifstream fin("in.txt");
 	ofstream fout("out.txt"), fout2("out2.txt");
 	string str, findPeople("<p class=\"FM-cbox5\"><a href=\"http://home.gamer.com.tw/"),
-				noPeople  ("<div class=\"FM-cboxfold");
+		noPeople("<div class=\"FM-cboxfold");
 	//success 沒刪文, fail 刪文
 	map<int, string> peopleList, winner;
 	int i, count = 1, del = 0, endFloor;
@@ -21,6 +21,7 @@ int main() {
 	cout << "截止樓層: ";
 	cin >> endFloor;
 
+	cout << "----------載入抽獎名單中----------" << endl;
 	while (getline(fin, str)) {
 		if (!str.compare(0, 54, findPeople)) {
 			string account = "", id = "";
@@ -29,7 +30,7 @@ int main() {
 				account += str[i];
 			for (i += (23 + account.length()); str[i] != ')'; i++)
 				id += str[i];
-			
+
 			peopleList[count] = account + " (" + id + ")";
 			fout << count << "F " << peopleList[count] << "\t";
 			if (!(count++ % 3))	fout << endl;
@@ -41,6 +42,8 @@ int main() {
 		if (count > endFloor)
 			break;
 	}
+	cout << "-------------載入結束-------------" << endl;
+	fout.close();
 
 	count--;
 	peopleList.erase(peopleList.find(1));
@@ -50,19 +53,19 @@ int main() {
 	//顯示抽獎人數
 	/*
 	i = 1;
-	for (auto iter = list.begin(); iter != list.end(); iter++, i++) {
-		printf("%3dF %25s\t", iter->first, iter->second.c_str());
-		if (!(i % 3))
-			cout << endl;
+	for (auto& iter:list) {
+	printf("%3dF %25s\t", iter->first, iter->second.c_str());
+	if (!(i++ % 3))
+	cout << endl;
 	}*/
 
 	int totalNum;
 
-	cout << "\n-------------\n輸入抽獎人數: ";
+	cout << "輸入抽獎人數: ";
 	cin >> totalNum;
 
 	srand(time(NULL));
-	
+
 	set<string> dup;
 	//排除重複
 	for (i = 0; i < totalNum && count; i++) {
@@ -74,6 +77,7 @@ int main() {
 		if (setSize == dup.size()) {
 			peopleList.erase(peopleList.find(iter->first));
 			count--;
+			i--;
 			continue;
 		}
 		winner[iter->first] = iter->second;
@@ -83,17 +87,17 @@ int main() {
 	cout << "中獎名單:" << endl;
 
 	i = 1;
-	for (auto iter = winner.begin(); iter != winner.end(); iter++, i++) {
-		printf("%3dF %25s\t", iter->first, iter->second.c_str());
-		fout2 << iter->first << "F " << iter->second << "\t";
-		if (!(i % 3)) {
+	for (auto& iter:winner) {
+		printf("%3dF %25s\t", iter.first, iter.second.c_str());
+		fout2 << iter.first << "F " << iter.second << "\t";
+		if (!(i++ % 3)) {
 			cout << endl;
 			fout2 << endl;
 		}
 	}
 
+	cout << "\n------結束請按任意鍵------" << endl;
 	fin.close();
-	fout.close();
 	fout2.close();
 	_getch();
 	return 0;
