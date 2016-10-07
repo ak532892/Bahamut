@@ -9,8 +9,8 @@
 using namespace std;
 
 int main() {
-	ifstream fin("in.txt");
-	ofstream fout("out.txt"), fout2("out2.txt");
+	ifstream fin("網頁原始碼.txt");
+	ofstream fout("抽獎名單.txt"), fout2("中獎名單.txt");
 	string str, findPeople("<p class=\"FM-cbox5\"><a href=\"http://home.gamer.com.tw/"),
 		noPeople("<div class=\"FM-cboxfold");
 	//success 沒刪文, fail 刪文
