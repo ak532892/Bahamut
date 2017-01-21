@@ -10,19 +10,19 @@
 using namespace std;
 
 int main() {
-	ifstream fin("ç¶²é åŸå§‹ç¢¼.txt");
-	ofstream fout("æŠ½çåå–®.txt"), fout2("ä¸­çåå–®.txt");
+	ifstream fin("ºô­¶­ì©l½X.txt");
+	ofstream fout("©â¼ú¦W³æ.txt"), fout2("¤¤¼ú¦W³æ.txt");
 	string str, findPeople("<p class=\"FM-cbox5\"><a href=\"http://home.gamer.com.tw/"),
 			noPeople("class=\"FM-cboxfold\"");
-	//findPeople æ²’åˆªæ–‡, noPeopleåˆªæ–‡
+	//findPeople ¨S§R¤å, noPeople§R¤å
 	map<int, string> peopleList, winner;
 	int i, count = 1, del = 0, endFloor, cgline = 1, noPeopleLen = noPeople.length();
 
-	//æˆªæ­¢æ¨“å±¤
-	cout << "æˆªæ­¢æ¨“å±¤: ";
+	//ºI¤î¼Ó¼h
+	cout << "ºI¤î¼Ó¼h: ";
 	cin >> endFloor;
 
-	cout << "----------è¼‰å…¥æŠ½çåå–®ä¸­----------" << endl;
+	cout << "----------¸ü¤J©â¼ú¦W³æ¤¤----------" << endl;
 	while (getline(fin, str)) {
 		if (!str.compare(0, 54, findPeople)) {
 			string account = "", id = "";
@@ -67,21 +67,21 @@ int main() {
 		if (count > endFloor)
 			break;
 	}
-	cout << "-------------è¼‰å…¥çµæŸ-------------" << endl;
+	cout << "-------------¸ü¤Jµ²§ô-------------" << endl;
 	fout.close();
 	count--;
 
-	//æ’é™¤è‡ªå·±
+	//±Æ°£¦Û¤v
 	if(peopleList.find(1) != peopleList.end())
 		peopleList.erase(peopleList.find(1));
 	del++;
 	count -= del;
 
-	//é©—è­‰ä¸€ä¸‹è‡ªå·±æ²’æœ‰å°‘è²¼ä¸Šæ¨“å±¤
-	cout << "ç¸½æ–‡ç« : " << count << endl;
-	cout << "è‡ªåˆª or è¢«åˆªæ–‡ç« æ•¸: " << del << endl;
+	//ÅçÃÒ¤@¤U¦Û¤v¨S¦³¤Ö¶K¤W¼Ó¼h
+	cout << "Á`¤å³¹: " << count << endl;
+	cout << "¦Û§R or ³Q§R¤å³¹¼Æ: " << del << endl;
 	
-	//é¡¯ç¤ºæŠ½çäººæ•¸
+	//Åã¥Ü©â¼ú¤H¼Æ
 	/*
 	i = 1;
 	for (auto& iter:list) {
@@ -93,13 +93,13 @@ int main() {
 
 	int totalNum;
 	
-	cout << "è¼¸å…¥æŠ½çäººæ•¸: ";
+	cout << "¿é¤J©â¼ú¤H¼Æ: ";
 	cin >> totalNum;
 
 	srand(time(NULL));
 
 	set<string> dup;
-	//æ’é™¤é‡è¤‡
+	//±Æ°£­«½Æ
 	for (i = 0; i < totalNum && count; i++) {
 		int luckyNum = (rand() % count);
 		int setSize = dup.size();
@@ -116,7 +116,7 @@ int main() {
 		peopleList.erase(peopleList.find(iter->first));
 		count--;
 	}
-	cout << "ä¸­çåå–®:" << endl;
+	cout << "¤¤¼ú¦W³æ:" << endl;
 
 	i = 1;
 	for (auto& iter:winner) {
@@ -127,7 +127,7 @@ int main() {
 			fout2 << endl;
 		}
 	}
-	cout << "\n------çµæŸè«‹æŒ‰ä»»æ„éµ------" << endl;
+	cout << "\n------µ²§ô½Ğ«ö¥ô·NÁä------" << endl;
 	
 	fin.close();
 	fout2.close();
