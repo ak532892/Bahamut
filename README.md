@@ -8,6 +8,4 @@
   抽獎人會保存在 抽獎名單.txt 。<br/>
   而抽籤結果也會另外保存在 中獎名單.txt 。<br/>
 
-DEMO
-
 [Demo on YouTube](https://www.youtube.com/watch?v=6AjL-HT-F6A)
